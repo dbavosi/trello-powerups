@@ -1,11 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Settings</title>
-  <script src="https://p.trellocdn.com/power-up.min.js"></script>
-</head>
-<body>
-  <h3>This is the Settings Popup</h3>
-  <p>If you see this, the popup is loading successfully.</p>
-</body>
-</html>
+TrelloPowerUp.initialize({
+  'board-buttons': function(t, options) {
+    console.log("Adding board button...");
+    return [{
+      text: 'Custom Field Settings',
+      callback: function(t) {
+        console.log("Custom Field Settings button clicked.");
+        return t.popup({
+          title: "Select Fields to Hide",
+          url: './settings.html',
+          height: 300
+        });
+      }
+    }];
+  },
+
+  'show-settings': function(t, options) {
+    console.log("Settings button clicked.");
+    return t.popup({
+      title: "Power-Up Settings",
+      url: './settings.html',
+      height: 300
+    });
+  }
+});
+
+console.log("Power-Up initialization complete.");
