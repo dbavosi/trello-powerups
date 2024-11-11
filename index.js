@@ -1,29 +1,20 @@
+console.log("Initializing Trello Power-Up...");
+
 TrelloPowerUp.initialize({
   'board-buttons': function(t, options) {
+    console.log("Adding board button...");
     return [{
-      text: 'Custom Field Settings',  // Button label
+      text: 'Custom Field Settings',
       callback: function(t) {
-        // Open the settings popup where users can select fields to hide
+        console.log("Custom Field Settings button clicked.");
         return t.popup({
           title: "Select Fields to Hide",
-          url: './settings.html',  // Path to your settings popup
+          url: './settings.html',
           height: 300
         });
       }
     }];
-  },
-  'card-detail-badges': async function(t, options) {
-    const customFields = await t.get('card', 'shared', 'customFields') || [];
-    const hiddenFields = await t.get('board', 'shared', 'hiddenFields') || [];
-
-    // Filter out hidden fields
-    const badges = customFields
-      .filter(field => !hiddenFields.includes(field.name))
-      .map(field => ({
-        text: field.value,
-        color: 'blue'
-      }));
-
-    return badges;
   }
 });
+
+console.log("Power-Up initialization complete.");
