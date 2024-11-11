@@ -14,6 +14,15 @@ TrelloPowerUp.initialize({
         });
       }
     }];
+  },
+
+  'show-settings': function(t, options) {
+    console.log("Settings button clicked.");
+    return t.popup({
+      title: "Power-Up Settings",
+      url: './settings.html',
+      height: 300
+    });
   }
 });
 
