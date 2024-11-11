@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
+</head>
+<body>
+  <h3>Select Custom Fields to Hide</h3>
+  <form id="fields-form"></form>
+  <button id="save-btn">Save</button>
+
+  <script>
+    const t = TrelloPowerUp.iframe();
+
+    async function loadFields() {
+      const customFields = await t.get('card', 'shared', 'customFields') || [];
+      const hiddenFields = await t.get('board', 'shared', 'hiddenFields') || [];
+
+      const form = document.getElementById('fields-form');
+      form.innerHTML = '';
+
+      customFields.forEach(field => {
+        const label = document.createElement('label');
+        label.textContent = field.name;
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = field.name;
+        checkbox.checked = hiddenFields.includes(field.name);
+        
+        label.appendChild(checkbox);
+        form.appendChild(label);
+        form.appendChild(document.createElement('br'));
+      });
+    }
+
+    document.getElementById('save-btn').addEventListener('click', async () => {
+      const checkboxes = document.querySelectorAll('#fields-form input[type="checkbox"]');
+      const hiddenFields = Array.from(checkboxes)
+                                .filter(checkbox => checkbox.checked)
+                                .map(checkbox => checkbox.value);
+
+      await t.set('board', 'shared', 'hiddenFields', hiddenFields);
+      t.closePopup();
+    });
+
+    loadFields();
+  </script>
+</body>
+</html>
