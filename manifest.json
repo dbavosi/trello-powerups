@@ -6,7 +6,7 @@
   ],
   "connectors": {
     "iframe": {
-      "url": "https://your-hosted-url.com/"
+      "url": "https://github.com/dbavosi/trello-powerups/blob/main/"
     }
   },
   "apiVersion": 1
