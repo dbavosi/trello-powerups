@@ -1,68 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Settings</title>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
 </head>
 <body>
-  <h3>Select Custom Fields to Hide</h3>
-  <form id="fields-form"></form>
-  <button id="save-btn">Save</button>
-
-  <script>
-    const t = TrelloPowerUp.iframe();
-
-    // Function to load custom fields and populate checkboxes
-    async function loadFields() {
-      try {
-        // Fetch custom fields for the board
-        const customFieldsData = await t.get('board', 'shared', 'customFields') || [];
-
-        // If no custom fields are found, show a message
-        if (customFieldsData.length === 0) {
-          document.getElementById('fields-form').innerHTML = "<p>No custom fields found on this board.</p>";
-          return;
-        }
-
-        // Fetch the list of fields previously marked as hidden
-        const hiddenFields = await t.get('board', 'shared', 'hiddenFields') || [];
-
-        const form = document.getElementById('fields-form');
-        form.innerHTML = '';  // Clear any previous form content
-
-        // Populate the form with checkboxes for each custom field
-        customFieldsData.forEach(field => {
-          const label = document.createElement('label');
-          label.textContent = field.name;
-
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkbox.value = field.name;
-          checkbox.checked = hiddenFields.includes(field.name);
-
-          label.appendChild(checkbox);
-          form.appendChild(label);
-          form.appendChild(document.createElement('br'));
-        });
-      } catch (error) {
-        console.error("Error loading fields:", error);
-        document.getElementById('fields-form').innerHTML = "<p>Error loading custom fields.</p>";
-      }
-    }
-
-    // Event listener to save hidden fields selection
-    document.getElementById('save-btn').addEventListener('click', async () => {
-      const checkboxes = document.querySelectorAll('#fields-form input[type="checkbox"]');
-      const hiddenFields = Array.from(checkboxes)
-                                .filter(checkbox => checkbox.checked)
-                                .map(checkbox => checkbox.value);
-
-      // Save the selected fields to hide
-      await t.set('board', 'shared', 'hiddenFields', hiddenFields);
-      t.closePopup();  // Close the popup after saving
-    });
-
-    // Load fields when the popup opens
-    loadFields();
-  </script>
+  <h3>This is the Settings Popup</h3>
+  <p>If you see this, the popup is loading successfully.</p>
 </body>
 </html>
