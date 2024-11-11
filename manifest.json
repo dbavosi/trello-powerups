@@ -2,7 +2,8 @@
   "name": "Hide Custom Fields",
   "capabilities": [
     "board-buttons",
-    "card-detail-badges"
+    "card-detail-badges",
+    "show-settings"
   ],
   "connectors": {
     "iframe": {
