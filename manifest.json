@@ -1,0 +1,13 @@
+{
+  "name": "Hide Custom Fields",
+  "capabilities": [
+    "board-buttons",
+    "card-detail-badges"
+  ],
+  "connectors": {
+    "iframe": {
+      "url": "https://your-hosted-url.com/"
+    }
+  },
+  "apiVersion": 1
+}
